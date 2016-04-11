@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segFromDirection;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segToDirection;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segLocation;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *inAnimationTypeSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *outAnimationTypeSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *imageAlignmentSegmentedControl;
@@ -217,6 +218,7 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
                                       kCRToastAnimationOutTypeKey               : @(CRToastAnimationTypeFromSegmentedControl(_outAnimationTypeSegmentedControl)),
                                       kCRToastAnimationInDirectionKey           : @(self.segFromDirection.selectedSegmentIndex),
                                       kCRToastAnimationOutDirectionKey          : @(self.segToDirection.selectedSegmentIndex),
+                                      kCRToastNotificationLocationKey           : @(self.segLocation.selectedSegmentIndex),
                                       kCRToastNotificationPreferredPaddingKey   : @(self.sliderPadding.value)} mutableCopy];
     if (self.showImageSwitch.on) {
         options[kCRToastImageKey] = [UIImage imageNamed:@"alert_icon.png"];

@@ -177,6 +177,7 @@ NSArray * CRToastGenericRecognizersMake(id target, CRToastInteractionResponder *
 #pragma mark - Option Constant Definitions
 
 NSString *const kCRToastNotificationTypeKey                 = @"kCRToastNotificationTypeKey";
+NSString *const kCRToastNotificationLocationKey             = @"kCRToastNotificationLocationKey";
 NSString *const kCRToastNotificationPreferredHeightKey      = @"kCRToastNotificationPreferredHeightKey";
 NSString *const kCRToastNotificationPreferredPaddingKey     = @"kCRToastNotificationPreferredPaddingKey";
 NSString *const kCRToastNotificationPresentationTypeKey     = @"kCRToastNotificationPresentationTypeKey";
@@ -235,6 +236,7 @@ NSString *const kCRToastCaptureDefaultWindowKey             = @"kCRToastCaptureD
 #pragma mark - Option Defaults
 
 static CRToastType                   kCRNotificationTypeDefault             = CRToastTypeStatusBar;
+static CRToastLocation               kCRNotificationLocationDefault         = CRToastLocationTop;
 static CGFloat                       kCRNotificationPreferredHeightDefault  = 0;
 static CGFloat                       kCRNotificationPreferredPaddingDefault  = 0;
 static CRToastPresentationType       kCRNotificationPresentationTypeDefault = CRToastPresentationTypePush;
@@ -310,6 +312,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
         kCRInteractionResponders = @[];
         
         kCRToastKeyClassMap = @{kCRToastNotificationTypeKey                 : NSStringFromClass([@(kCRNotificationTypeDefault) class]),
+                                kCRToastNotificationLocationKey             : NSStringFromClass([@(kCRNotificationLocationDefault) class]),
                                 kCRToastNotificationPreferredHeightKey      : NSStringFromClass([@(kCRNotificationPreferredHeightDefault) class]),
                                 kCRToastNotificationPreferredPaddingKey      : NSStringFromClass([@(kCRNotificationPreferredPaddingDefault) class]),
                                 kCRToastNotificationPresentationTypeKey     : NSStringFromClass([@(kCRNotificationPresentationTypeDefault) class]),
@@ -382,6 +385,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 + (void)setDefaultOptions:(NSDictionary*)defaultOptions {
     //TODO Validate Types of Default Options
     if (defaultOptions[kCRToastNotificationTypeKey])                kCRNotificationTypeDefault              = [defaultOptions[kCRToastNotificationTypeKey] integerValue];
+    if (defaultOptions[kCRToastNotificationLocationKey])            kCRNotificationLocationDefault          = [defaultOptions[kCRToastNotificationLocationKey] integerValue];
     if (defaultOptions[kCRToastNotificationPreferredHeightKey])     kCRNotificationPreferredHeightDefault   = [defaultOptions[kCRToastNotificationPreferredHeightKey] floatValue];
     if (defaultOptions[kCRToastNotificationPreferredPaddingKey])    kCRNotificationPreferredPaddingDefault  = [defaultOptions[kCRToastNotificationPreferredPaddingKey] floatValue];
     if (defaultOptions[kCRToastNotificationPresentationTypeKey])    kCRNotificationPresentationTypeDefault  = [defaultOptions[kCRToastNotificationPresentationTypeKey] integerValue];
@@ -532,6 +536,12 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
     return _options[kCRToastNotificationTypeKey] ?
     [self.options[kCRToastNotificationTypeKey] integerValue] :
     kCRNotificationTypeDefault;
+}
+
+- (CRToastLocation)notificationLocation {
+    return _options[kCRToastNotificationLocationKey] ?
+    [self.options[kCRToastNotificationLocationKey] integerValue] :
+    kCRNotificationLocationDefault;
 }
 
 - (CGFloat)preferredHeight {

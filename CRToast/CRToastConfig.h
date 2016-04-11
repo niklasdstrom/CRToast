@@ -74,6 +74,15 @@ typedef NS_ENUM(NSInteger, CRToastType){
 };
 
 /**
+ `CRToastLocation` defines where in the viewport the notification should be shown. `CRToastLocationTop` shows on the top of the screen while `CRToastLocationBottom` shows on the bottom.
+ If chosing `CRToastLocationBottom` the only only `CRToastTypeCustom` has any relevant semantic meaning.
+ */
+typedef NS_ENUM(NSInteger, CRToastLocation){
+    CRToastLocationTop,
+    CRToastLocationBottom
+};
+
+/**
  `CRToastPresentationType` defines whether a notification will cover the contents of the status/navigation bar or whether the content will be pushed
  out by the notification.
  */
@@ -134,6 +143,11 @@ typedef NS_ENUM(NSInteger, CRToastAccessoryViewAlignment){
  The notification type for the notification. Expects type `CRToastType`.
  */
 extern NSString *const kCRToastNotificationTypeKey;
+
+/**
+ The notification type for the notification. Expects type `CRToastLocation`.
+ */
+extern NSString *const kCRToastNotificationLocationKey;
 
 /**
  The preferred height for the notificaiton, this will only be used for notifications with CRToastTypeCustom set for kCRToastNotificationTypeKey
@@ -398,6 +412,7 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 //Read Only Convinence Properties Providing Default Values or Values from Options
 
 @property (nonatomic, readonly) CRToastType notificationType;
+@property (nonatomic, readonly) CRToastLocation notificationLocation;
 @property (nonatomic, assign) CGFloat preferredHeight;
 @property (nonatomic, assign) CGFloat preferredPadding;
 @property (nonatomic, readonly) CRToastPresentationType presentationType;
